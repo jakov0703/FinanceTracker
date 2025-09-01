@@ -16,5 +16,24 @@ namespace FinanceTracker
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var ctx = new RWA2425_jvrbanjac22_DBEntities()) // naziv konteksta, vidi u .edmx
+                {
+                    var usersCount = ctx.Users.Count();
+                    var catsCount = ctx.Categories.Count();
+                    var txCount = ctx.Transactions.Count();
+
+                    MessageBox.Show($"Connected!\nUsers: {usersCount}\nCategories: {catsCount}\nTransactions: {txCount}");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("DB error: " + ex.Message);
+            }
+        }
     }
 }
